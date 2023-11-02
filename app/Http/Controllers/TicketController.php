@@ -42,7 +42,9 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        echo 'request';
+        // return 'request';
+        return to_route('tickets.index')
+            ->with('mensagem.sucesso', "Removida com sucesso");
     }
 
     /**
@@ -50,7 +52,7 @@ class TicketController extends Controller
      */
     public function show(ticket $ticket)
     {
-        //
+        
     }
 
     /**
@@ -58,7 +60,7 @@ class TicketController extends Controller
      */
     public function edit(ticket $ticket)
     {
-        //
+        return view('tickets.editar-ticket');
     }
 
     /**
@@ -74,6 +76,6 @@ class TicketController extends Controller
      */
     public function destroy(ticket $ticket)
     {
-        //
+        return 'excluido';
     }
 }

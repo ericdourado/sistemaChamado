@@ -37,9 +37,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
 Route::get('/criar-ticket', [TicketController::class, 'create'])->name('ticket.create');
 Route::post('/criar-ticket', [TicketController::class, 'store'])->name('ticket.store');
-// Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
+Route::put('/editar-ticket/{id}', [TicketController::class, 'edit'])->name('ticket.edit');
+Route::delete('/excluir-ticket/{id}', [TicketController::class, 'destoy'])->name('ticket.destoy');
+
 
 //user abaixo
-// Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
+Route::get('/tickets-usuario', [TicketController::class, 'tickets-usuario'])->name('ticket.ticksts-usuario');
 
 require __DIR__.'/auth.php';
