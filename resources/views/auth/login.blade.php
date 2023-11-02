@@ -39,9 +39,9 @@
                 </a>
             @endif --}}
 
-                {{-- <a class="ml-3 underline text-sm text-white hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                <a class="ml-3 underline text-sm text-white hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
                     {{ __('Registrar-se' ) }}
-                </a> --}}
+                </a>
 
             <x-primary-button class="ml-3">
                 {{ __('Entrar') }}

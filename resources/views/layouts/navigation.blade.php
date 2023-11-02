@@ -23,7 +23,7 @@
                     </x-nav-link>
 
                     
-                    <x-nav-link :href=" route('register') ">
+                    <x-nav-link :href=" route('cadastro.create') ">
                         Cadastro
                     </x-nav-link>
                     

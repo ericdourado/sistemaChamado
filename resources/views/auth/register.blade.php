@@ -1,5 +1,7 @@
 
-<x-app-layout>
+
+{{-- <x-app-layout> --}}
+
 <x-guest-layout>
     <div>
         <form method="POST" action="{{ route('register') }}">
@@ -29,10 +31,17 @@
                 <x-input-label for="sexo" :value="__('Cargo')" />
                     <select  name="role_id">
                         @foreach ($roles as $role)
-                            <option value="{{$role->id}}">{{$role->role}}</option>
+                            @if ($role->id != 1)
+                                <option value="{{$role->id}}">{{$role->role}}</option>
+                            @endif
+
+                            @auth
+                                @if ($role->id == 1)
+                                    <option value="{{$role->id}}">{{$role->role}}</option>
+                                @endif
+                            @endauth
                         @endforeach
                     </select>
-                    
             </div>
 
 
@@ -71,4 +80,8 @@
         </form>
     </div>
 </x-guest-layout>
-</x-app-layout>
+
+
+{{-- </x-app-layout> --}}
+
+

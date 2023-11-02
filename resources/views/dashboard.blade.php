@@ -18,7 +18,7 @@
                 <div class="p-6 text-gray-900">
 
 
-                    tickets talvez?
+                    tickets aqui
 
                     
                 </div>
