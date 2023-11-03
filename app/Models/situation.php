@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class situation extends Model
 {
+    protected $table = "situation";
+
     use HasFactory;
 }

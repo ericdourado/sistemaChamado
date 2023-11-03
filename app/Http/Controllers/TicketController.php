@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ticket;
 use App\Http\Requests\StoreticketRequest;
 use App\Http\Requests\UpdateticketRequest;
+use App\Models\situation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,9 +18,9 @@ class TicketController extends Controller
     {
         // $tickets = new ticket();
         // $tickets = $tickets->get();
-
         $tickets = DB::table('tickets')
             ->join('users as cliente', 'cliente.id', '=', 'tickets.user_id')
+            ->join('situation as situacao', 'situacao.id', '=', 'tickets.situation')
             ->leftjoin('users as tecnico', 'tecnico.id', '=', 'tickets.suport_id')
             ->select(
                 'cliente.id as id_cliente',
@@ -30,11 +31,32 @@ class TicketController extends Controller
                 'tickets.ticket_name as ticket_nome',
                 'tickets.description as ticket_descricao',
                 'tickets.created_at as ticket_criado_em',
-                'tickets.updated_at as ticket_atualizado_em'
-            )
-            ->get();
+                'tickets.updated_at as ticket_atualizado_em',
+                'situacao.description as status',
+                'situacao.id as situacao_id'
+            );
 
-        return view('tickets.listar-tickets')->with('tickets', $tickets);
+        if (!empty($request->input('filtro'))) {
+            $filtro = $request->input('filtro');
+            $tickets = $tickets->where('tickets.ticket_name', 'like', "%$filtro%")
+                ->orWhere('tecnico.name', 'like', "%$filtro%")
+                ->orWhere('tickets.description', 'like', "%$filtro%")
+                ->orWhere('tecnico.name', 'like', "%$filtro%")
+                ->orWhere('situacao.description', 'like', "%$filtro%");
+        }
+
+        $statusSelecionado = '';
+        if (!empty($request->input('filtro_status'))) {
+            $statusSelecionado = $request->input('filtro_status');
+            $tickets = $tickets->where('situacao.id', '=', "$statusSelecionado");
+        }
+
+        $tickets = $tickets->get();
+
+        $status = new situation();
+        $status = $status->get();
+
+        return view('tickets.listar-tickets')->with('tickets', $tickets)->with('status', $status)->with('statusSelecionado', $statusSelecionado);
     }
 
     /**
