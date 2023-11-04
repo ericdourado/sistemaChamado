@@ -29,11 +29,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     Route::get('/cadastro', [cadastro::class, 'create'])->name('cadastro.create');
+
+
     Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
     Route::get('/criar-ticket', [TicketController::class, 'create'])->name('ticket.create');
     Route::post('/criar-ticket', [TicketController::class, 'store'])->name('ticket.store');
-    Route::get('/editar-ticket/{id}', [TicketController::class, 'edit'])->name('ticket.edit');
+    Route::post('/editar-ticket/{id}', [TicketController::class, 'edit'])->name('ticket.edit');
+    Route::post('/editar-ticket/atribuir/suport/{id}', [TicketController::class, 'atribuir'])->name('ticket.atribuir');
     Route::get('/excluir-ticket/{id}', [TicketController::class, 'destroy'])->name('ticket.destroy');
 });
 

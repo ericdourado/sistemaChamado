@@ -110,15 +110,85 @@
                                     <div class="truncate-description" title="{{ $ticket->ticket_descricao }}">
                                         {{ $ticket->ticket_descricao }}</div>
                                 </td>
-                                <td scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $ticket->status }}</td>
+
+
+
+
+                                @if (auth()->user()->role_id == 1)
+                                    {{-- <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{ $ticket->status }}</td> --}}
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <form action="/editar-ticket/atribuir/suport/{{$ticket->ticket_id}}" method="POST">
+                                            @csrf
+                                            <select id="status" name="status" onchange="form.submit()"
+                                                class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
+                                                
+                                                <option value="">{{$ticket->status}}</option>
+
+                                                @foreach ($status as $value)
+                                                    <option value="{{ $value->id }}" >
+                                                        {{ $value->description }}
+                                                    </option>
+                                                @endforeach
+
+                                            </select>
+                                        </form>
+                                    </td>
+
+                                @else
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                                        <form action="/editar-ticket/atribuir/suport/{{$ticket->ticket_id}}" method="POST">
+                                            @csrf
+                                            <select id="status" name="status" onchange="form.submit()"
+                                                class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
+                                                
+                                                <option value="">{{$ticket->status}}</option>
+
+                                                @foreach ($status as $value)
+                                                    @if ($value->id == 4)
+                                                        <option value="{{ $value->id }}" >
+                                                            {{ $value->description }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+
+                                            </select>
+                                        </form>    
+                                    
+                                    </td>
+                                @endif
+
+
+
+
                                 <td scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $ticket->cliente_nome }}</td>
-                                <td scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $ticket->tecnico_nome }}</td>
+
+
+                                @if (auth()->user()->role_id == 1)
+                                   
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                                        <form action="/editar-ticket/atribuir/suport/{{$ticket->ticket_id}}" method="POST">
+                                            @csrf
+                                            <select id="tecnico" name="tecnico" onchange="form.submit()"
+                                                class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
+                                                
+                                                <option value="">{{$ticket->tecnico_nome}}</option>
+
+                                                @foreach ($tecnicos as $tecnico)
+                                                    <option value="{{ $tecnico->id }}" >
+                                                        {{ $tecnico->name }}
+                                                    </option>
+                                                @endforeach
+                    
+                                            </select>
+                                        </form>
+                                    </td>
+                                @else
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{ $ticket->tecnico_nome }}</td>
+                                @endif
+
+
                                 <td scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $ticket->ticket_criado_em }}</td>

@@ -6,6 +6,7 @@ use App\Models\ticket;
 use App\Http\Requests\StoreticketRequest;
 use App\Http\Requests\UpdateticketRequest;
 use App\Models\situation;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -74,6 +75,10 @@ class TicketController extends Controller
         }
 
         $tickets = $tickets->get();
+        
+        $tecnicos = new User();
+        $tecnicos = $tecnicos->where('role_id', '=', 1)->get();
+        
 
         $status = new situation();
         $status = $status->get();
@@ -81,7 +86,8 @@ class TicketController extends Controller
         return view('tickets.listar-tickets')
                     ->with('tickets', $tickets)
                     ->with('status', $status)
-                    ->with('statusSelecionado', $statusSelecionado);
+                    ->with('statusSelecionado', $statusSelecionado)
+                    ->with('tecnicos', $tecnicos);
     
     }
 
@@ -149,5 +155,46 @@ class TicketController extends Controller
     {
         ticket::destroy($ticket);
         return redirect()->route('ticket.index');
+    }
+    public function atribuir(int $ticketid, Request $request)
+    {
+        if (!empty($request->tecnico)){
+            $dados_atualizados = [
+                'suport_id' => $request->tecnico,
+                'situation' => 2,
+                'suport_started' => 1
+            ];
+    
+            $ticket = Ticket::find($ticketid);
+    
+            if ($ticket) {
+                $ticket->update($dados_atualizados);
+                return redirect()->route('ticket.index');
+            } else {
+                return redirect()->route('ticket.index')->with('mensagem.erro', 'Ticket não encontrado');
+            }
+
+        }
+        if (!empty($request->status)){
+            $dados_atualizados = [
+                'situation' => $request->status,
+            ];
+
+            $ticket = Ticket::find($ticketid);
+
+            if ($ticket) {
+                $ticket->update($dados_atualizados);
+                return redirect()->route('ticket.index');
+            } else {
+                return redirect()->route('ticket.index')->with('mensagem.erro', 'Ticket não encontrado');
+            }
+
+
+        }
+        
+
+
+
+        
     }
 }
