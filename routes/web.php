@@ -30,9 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/cadastro', [cadastro::class, 'create'])->name('cadastro.create');
-
-
-    
     Route::get('/ticket', [TicketController::class, 'index'])->name('ticket.index');
     Route::get('/criar-ticket', [TicketController::class, 'create'])->name('ticket.create');
     Route::post('/criar-ticket', [TicketController::class, 'store'])->name('ticket.store');
