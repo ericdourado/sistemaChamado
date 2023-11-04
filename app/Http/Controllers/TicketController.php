@@ -6,6 +6,7 @@ use App\Models\ticket;
 use App\Http\Requests\StoreticketRequest;
 use App\Http\Requests\UpdateticketRequest;
 use App\Models\situation;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -133,7 +134,12 @@ class TicketController extends Controller
      */
     public function update(UpdateticketRequest $request, ticket $ticket)
     {
-        //
+
+        if(!empty($ticket)) {
+            return redirect()->back();
+        }
+
+        return Redirect::route('ticket.edit')->with('ticket', $ticket)->with('status', 'ticket-updated');
     }
 
     /**
