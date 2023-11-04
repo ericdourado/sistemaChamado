@@ -77,7 +77,11 @@ class TicketController extends Controller
         $status = new situation();
         $status = $status->get();
 
-        return view('tickets.listar-tickets')->with('tickets', $tickets)->with('status', $status)->with('statusSelecionado', $statusSelecionado);
+        return view('tickets.listar-tickets')
+                    ->with('tickets', $tickets)
+                    ->with('status', $status)
+                    ->with('statusSelecionado', $statusSelecionado);
+    
     }
 
     /**
@@ -124,8 +128,9 @@ class TicketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ticket $ticket)
+    public function destroy(int $ticket)
     {
-        return 'excluido';
+        ticket::destroy($ticket);
+        return redirect()->route('ticket.index');
     }
 }

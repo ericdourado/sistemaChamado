@@ -64,9 +64,8 @@
                         <th scope="col" class="px-6 py-3"> Criador</th>
                         <th scope="col" class="px-6 py-3"> Técnico</th>
                         <th scope="col" class="px-6 py-3"> Criado em</th>
-                        <th scope="col" class="px-6 py-3"> Última
-                            atualização
-                        </th>
+                        <th scope="col" class="px-6 py-3"> Última atualização</th>
+                        <th scope="col" class="px-6 py-3"> Deletar </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,6 +101,16 @@
                                 <td scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $ticket->ticket_atualizado_em }}</td>
+                                
+                                <td>
+                                    <a href="/excluir-ticket/{{$ticket->ticket_id}}" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded inline-flex items-center">
+                                        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                        Excluir
+                                    </a>
+                                </td>
+
                             </tr>
                         @endforeach
 
