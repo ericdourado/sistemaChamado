@@ -1,29 +1,30 @@
 <style>
     .truncate-description {
-        max-width: 300px;
+        max-width: 150px;
         /* Defina a largura máxima desejada */
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .botao-laranja {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #FF8C00; 
-    color: #fff; 
-    text-decoration: none;
-    border: 1px solid #FF8C00;
-    border-radius: 5px;
-    margin-top: 5px;
-  }
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #FF8C00;
+        color: #fff;
+        text-decoration: none;
+        border: 1px solid #FF8C00;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
 
-  .botao-laranja:hover {
-    background-color: #ff7f00;
-  }
-  .novo{
-    text-align: center;
-  }
+    .botao-laranja:hover {
+        background-color: #ff7f00;
+    }
 
+    .novo {
+        text-align: center;
+    }
 </style>
 
 
@@ -37,26 +38,27 @@
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
-            <div class="novo">
-                <a href="{{route('ticket.create')}}" class="botao-laranja">Novo</a>
-            </div>
             <div class="flex items-center justify-between pb-4">
                 <div>
-                    <form>   
+                    <form>
                         <select id="filtro" name="filtro_status" onchange="form.submit()"
-                            class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
-                            <option value="">Status</option>
-                            @foreach ($status as $item)
-                                <option value="{{ $item->id }}" {{ $statusSelecionado == $item->id ? 'selected' : '' }}>
-                                    {{ $item->description }}
-                                </option>
-                            @endforeach
-
-                        </select>
-                    </form>
-
-                </div>
-                <label for="table-search" class="sr-only">Search</label>
+                        class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
+                        <option value="">Status</option>
+                        @foreach ($status as $item)
+                        <option value="{{ $item->id }}"
+                            {{ $statusSelecionado == $item->id ? 'selected' : '' }}>
+                            {{ $item->description }}
+                        </option>
+                        @endforeach
+                        
+                    </select>
+                </form>
+                
+            </div>
+            <div class="novo">
+                <a href="{{ route('ticket.create') }}" class="botao-laranja">Novo</a>
+            </div>
+            <label for="table-search" class="sr-only">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
@@ -122,11 +124,14 @@
                                 <td scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $ticket->ticket_atualizado_em }}</td>
-                                
+
                                 <td>
-                                    <a href="/excluir-ticket/{{$ticket->ticket_id}}" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded inline-flex items-center">
-                                        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    <a href="/excluir-ticket/{{ $ticket->ticket_id }}"
+                                        class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded inline-flex items-center">
+                                        <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12"></path>
                                         </svg>
                                         Excluir
                                     </a>
