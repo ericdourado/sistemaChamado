@@ -97,9 +97,20 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        // return 'request';
-        return to_route('tickets.index')
-            ->with('mensagem.sucesso', "Removida com sucesso");
+        
+        $adicionar_ticket = [
+            'user_id' => auth()->user()->id,
+            'suport_id' => null,
+            'situation' => 1,
+            'ticket_name' => $request->titulo,
+            'anydesk' => $request->anydesk,
+            'description' => $request->descricao,
+            'suport_started' => null
+        ];
+
+        $ticket = Ticket::create($adicionar_ticket);
+        return to_route('ticket.index')
+            ->with('mensagem.sucesso', "Criado com sucesso");
     }
 
     /**
