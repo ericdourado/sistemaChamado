@@ -8,6 +8,13 @@
     .button-submite{
         text-align: center;
     }
+    .botao_interacoes_chamado{
+        text-align: center;
+    }
+    .div_botao_interacoes_chamado{
+        text-align: center;
+        margin-bottom: 3em
+    }
 </style>
 
 <x-app-layout>
@@ -19,14 +26,17 @@
   
 
     <div class="py-12">
+        
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="div_botao_interacoes_chamado">
+                <a href="/ticket/feedback/{{$ticket_id}}" class="botao_interacoes_chamado bg-orange-500 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"> Interações do Chamado </a>
+            </div>
             <div class="fundo-laranja overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <form method="POST" action="/editar-ticket/{{$ticket_id}}">
                         @csrf
                         <div class="mb-4">
                             <label for="id_ticket" class="block text-sm font-medium text-white">ID do ticket:  {{$ticket[0]->ticket_id}} </label>
-                            
                         </div>
                         <div class="mb-4">
                             <label for="titulo" class="block text-sm font-medium text-white">Titulo do ticket:</label>

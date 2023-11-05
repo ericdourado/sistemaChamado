@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\cadastro;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SuportfollowupController;
 use App\Http\Controllers\TicketController;
+use App\Models\suportfollowup;
 use App\Models\ticket;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +44,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/editar-ticket/atribuir/suport/{id}', [TicketController::class, 'atribuir'])->name('ticket.atribuir');
     Route::get('/excluir-ticket/{id}', [TicketController::class, 'destroy'])->name('ticket.destroy');
+
+
+    Route::get('/ticket/feedback/{id}', [SuportfollowupController::class, 'index'])->name('ticket.feedback.index');
+    Route::post('/ticket/feedback', [SuportfollowupController::class, 'store'])->name('ticket.feedback.store');
+
 });
 
 
