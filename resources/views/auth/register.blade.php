@@ -28,11 +28,11 @@
             </div>
 
             <div class="mt-4">
-                <x-input-label for="sexo" :value="__('Cargo')" />
-                    <select  name="role_id">
+                <x-input-label for="cargo" :value="__('Cargo')" style="display:none" />
+                    <select name="role_id" id="cargo" style="display:none">
                         @foreach ($roles as $role)
                             @if ($role->id != 1)
-                                <option value="{{$role->id}}">{{$role->role}}</option>
+                                <option  value="{{$role->id}}">{{$role->role}}</option>
                             @endif
 
                             @auth

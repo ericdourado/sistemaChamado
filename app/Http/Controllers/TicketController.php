@@ -74,7 +74,7 @@ class TicketController extends Controller
             $tickets = $tickets->where('situacao.id', '=', "$statusSelecionado");
         }
 
-        $tickets = $tickets->get();
+        $tickets = $tickets->paginate(10);
         
         $tecnicos = new User();
         $tecnicos = $tecnicos->where('role_id', '=', 1)->get();
@@ -116,8 +116,9 @@ class TicketController extends Controller
         ];
 
         $ticket = Ticket::create($adicionar_ticket);
-        return to_route('ticket.index')
-            ->with('mensagem.sucesso', "Criado com sucesso");
+        return redirect()->route('ticket.index')
+                ->with('mensagem_sucesso', "Criado ticket <a href='/editar-ticket/$ticket->id'>$ticket->id - $ticket->ticket_name (Clique Aqui para visualizar)</a> com sucesso!");
+
     }
 
     /**
@@ -130,22 +131,62 @@ class TicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ticket $ticket)
+    public function edit(int $ticket_id, Request $request)
     {
-        return view('tickets.editar-ticket');
+        $ticket = DB::table('tickets')
+        ->join('users as cliente', 'cliente.id', '=', 'tickets.user_id')
+        ->join('situation as situacao', 'situacao.id', '=', 'tickets.situation')
+        ->leftjoin('users as tecnico', 'tecnico.id', '=', 'tickets.suport_id')
+        ->select(
+            'tickets.id as ticket_id',
+            'tecnico.id as tecnico_id',
+            'tecnico.name as tecnico_nome',
+            'tickets.ticket_name as ticket_nome',
+            'tickets.description as ticket_descricao',
+            'situacao.id as situacao_id',
+            'situacao.description as status',
+            'tickets.anydesk as anydesk'
+        )->where('tickets.id', '=', $ticket_id)
+        ->get();
+
+        $tecnicos = new User();
+        $tecnicos = $tecnicos->where('role_id', '=', 1)->get();
+        
+        $status = new situation();
+        $status = $status->get();
+
+
+        return view('tickets.editar-ticket')
+            ->with('ticket_id', $ticket_id)
+            ->with('ticket', $ticket)
+            ->with('tecnicos', $tecnicos)
+            ->with('status', $status);
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateticketRequest $request, ticket $ticket)
+    public function update(int $ticket_id, Request $request)
     {
 
-        if(!empty($ticket)) {
-            return redirect()->back();
+        $editar_ticket = [
+            'suport_id' => $request->tecnico,
+            'situation' => $request->status,
+            'ticket_name' => $request->titulo,
+            'anydesk' => $request->anydesk,
+            'description' => $request->descricao
+        ];
+
+        $ticket = Ticket::find($ticket_id);
+
+        if ($ticket) {
+            $ticket->update($editar_ticket);
+            return redirect()->route('ticket.index');
+        } else {
+            return redirect()->route('ticket.index')->with('mensagem', 'Ticket não encontrado');
         }
 
-        return Redirect::route('ticket.edit')->with('ticket', $ticket)->with('status', 'ticket-updated');
     }
 
     /**
@@ -191,10 +232,6 @@ class TicketController extends Controller
 
 
         }
-        
 
-
-
-        
     }
 }

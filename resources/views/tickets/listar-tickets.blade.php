@@ -25,6 +25,14 @@
     .novo {
         text-align: center;
     }
+    .div-paginacao {
+        display: flex;
+        justify-content: center;
+        
+    }
+    body > div > main > div > div > div.div-paginacao > div > ul > nav > div.hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        flex-direction: column-reverse; 
+    }
 </style>
 
 
@@ -36,8 +44,15 @@
         </h2>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
+            
+                @if(session('mensagem_sucesso'))
+                    <div class="novo bg-green-400 text-white p-4">
+                        {!! session('mensagem_sucesso') !!}
+                    </div>
+                @endif
+            
             <div class="flex items-center justify-between pb-4">
                 <div>
                     <form>
@@ -111,9 +126,6 @@
                                         {{ $ticket->ticket_descricao }}</div>
                                 </td>
 
-
-
-
                                 @if (auth()->user()->role_id == 1)
                                     {{-- <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{ $ticket->status }}</td> --}}
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -170,6 +182,7 @@
                                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
                                         <form action="/editar-ticket/atribuir/suport/{{$ticket->ticket_id}}" method="POST">
                                             @csrf
+
                                             <select id="tecnico" name="tecnico" onchange="form.submit()"
                                                 class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
                                                 
@@ -180,8 +193,8 @@
                                                         {{ $tecnico->name }}
                                                     </option>
                                                 @endforeach
-                    
                                             </select>
+
                                         </form>
                                     </td>
                                 @else
@@ -222,10 +235,18 @@
                             </tr>
                         @endforeach
 
-
                     @endif
 
                 </tbody>
             </table>
+            <div class="div-paginacao">
+                <div class="pagination-container">
+                    <ul class=" pagination pagination-sm justify-content-center">
+                        {{ $tickets->links() }}
+                    </ul>
+                </div> 
+            </div>
         </div>
 </x-app-layout>
+
+
