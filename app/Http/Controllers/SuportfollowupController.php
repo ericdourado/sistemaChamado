@@ -25,6 +25,7 @@ class SuportfollowupController extends Controller
                                     'suportfollowup.created_at',
                                     'suportfollowup.description'
                                 )->where('suportfollowup.ticket_id','=', $ticket_id)
+                                ->orderBy('created_at', 'desc')
                                 ->get();
 
         return view('tickets.feedback')
