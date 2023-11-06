@@ -21,11 +21,14 @@
                         {{ __('Pagina Inicial') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('ticket.index')">
+                        Tickets
+                    </x-nav-link>
+
                     {{-- colocar menu de adm aqui --}}
 
                     @if (!empty(auth()->user()->role_id == 1))
                         @if (auth()->user()->role_id == 1)
-                     
                             <x-nav-link :href="route('cadastro.create')">
                                 Cadastro
                             </x-nav-link>
@@ -34,9 +37,7 @@
                             </x-nav-link>
                         @endif
                     @endif
-                    <x-nav-link :href="route('ticket.index')">
-                        Tickets
-                    </x-nav-link>
+
 
                 </div>
 
