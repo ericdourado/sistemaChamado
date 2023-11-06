@@ -29,6 +29,9 @@
                             <x-nav-link :href="route('cadastro.create')">
                                 Cadastro
                             </x-nav-link>
+                            <x-nav-link :href="route('users.index')">
+                                Usuários
+                            </x-nav-link>
                         @endif
                     @endif
                     <x-nav-link :href="route('ticket.index')">

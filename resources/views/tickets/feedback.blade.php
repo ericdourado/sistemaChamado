@@ -33,11 +33,22 @@
                         <textarea id="descricao" name="descricao" class="form-input rounded-md shadow-sm mt-1 block w-full"></textarea>
                     </div>
 
-                    {{-- <div class="corpo_mensagens">
-                        @foreach ($suportefollowup as $value)
-                            
+
+                    
+                    <div class="corpo_mensagens mr-auto">
+                        @foreach ($suportefollowups as $suportefollowup)
+                            {{-- @if (auth()->user()->id !=  $suportefollowup->id) --}}
+                                <div class="bg-yellow-800 text-white rounded-lg p-2 m-4 max-w-xs @php
+                                    echo auth()->user()->id != $suportefollowup->id ? '' : 'ml-auto'
+                                @endphp ">
+                                    <div class="font-semibold">{{ $suportefollowup->name }}</div>
+                                    <div class="text-xs text-gray-400">{{$dataFormatada = date("d/m/Y H:i", strtotime($suportefollowup->created_at ))}}</div>
+                                    <div class="mt-2">{{ $suportefollowup->description }}</div>
+                                </div>
                         @endforeach
-                    </div> --}}
+                    </div>
+                    
+                    
 
                     <div class="mb-4 button-submite">
                         <button type="submit" class="bg-orange-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
