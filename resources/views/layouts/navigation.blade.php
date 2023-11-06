@@ -103,6 +103,26 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('ticket.index')" :active="request()->routeIs('tickets')">
+                {{ __('Tickets') }}
+            </x-responsive-nav-link>
+
+
+            {{-- colocar menu de adm aqui --}}
+
+            @if (!empty(auth()->user()->role_id == 1))
+                @if (auth()->user()->role_id == 1)
+                    <x-responsive-nav-link :href="route('cadastro.create')">
+                        Cadastro
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('users.index')">
+                        Usuários
+                    </x-responsive-nav-link>
+                @endif
+            @endif
+
+
         </div>
 
         <!-- Responsive Settings Options -->
