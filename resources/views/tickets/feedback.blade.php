@@ -28,7 +28,7 @@
                         <input type="text" name="ticket_id" value="{{$ticket_id}}" id="ticket_id" class="form-input rounded-md shadow-sm mt-1 block w-full" />
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-4 p-5">
                         <label for="descricao" class="block text-sm font-medium text-white">Descricao:</label>
                         <textarea id="descricao" name="descricao" class="form-input rounded-md shadow-sm mt-1 block w-full"></textarea>
                     </div>
