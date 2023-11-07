@@ -194,15 +194,18 @@
                                             <select id="tecnico" name="tecnico" onchange="form.submit()"
                                                 class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
                                                 
-                                                {{-- <option value="">{{$ticket->tecnico_nome}}</option> --}}
-                                                {{-- <option value="{{ $value->id }}" @if ($ticket->situacao_id == $value->id) selected @endif > --}}
-                                                @foreach ($tecnicos as $tecnico)
+                                                @if (empty($ticket->tecnico_nome))
+                                                    <option value="">{{$ticket->tecnico_nome}}</option>
+                                                @endif
                                                 
-                                                    <option value="{{ $tecnico->id }}" @if ($ticket->tecnico_nome== $tecnico->name) selected @endif>
-                                                        {{ $tecnico->name }}
+                                                @foreach ($tecnicos as $tecnico)
+                                                    <option value="{{ $tecnico->id }}" @if ($ticket->tecnico_id == $tecnico->id) selected @endif>
+                                                        {{ $tecnico->name }} 
                                                     </option>
                                                 @endforeach
                                             </select>
+
+                                            
 
                                         </form>
                                     </td>
