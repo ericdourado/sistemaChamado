@@ -36,10 +36,9 @@
                                         @csrf
                                         <input type="hidden" value="{{$user->id}}" name="user_id" id="user_id"/>
                                         <select id="cargo" name="cargo" onchange="form.submit()" class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
-                                            <option value="">{{$user->role}}</option>
                                             @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}" >
-                                                    {{ $role->role }}
+                                                <option value="{{ $role->id }}" @if ($role->id == $user->role_id) selected @endif>
+                                                {{ $role->role }}
                                                 </option>
                                             @endforeach
                                         </select>
