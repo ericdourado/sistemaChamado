@@ -142,7 +142,7 @@
                                             <select id="status" name="status" onchange="form.submit()"
                                                 class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
                                                 
-                                                {{-- <option value="">{{$ticket->status}}</option> --}}
+                                                <option value="">{{$ticket->status}}</option>
 
                                                 @foreach ($status as $value)
                                                     <option value="{{ $value->id }}" >
