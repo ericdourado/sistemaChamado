@@ -33,6 +33,14 @@
     body > div > main > div > div > div.div-paginacao > div > ul > nav > div.hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
         flex-direction: column-reverse; 
     }
+    
+    .edit-id {
+        color: #42b0f5;
+    }
+
+    .edit-id:hover {
+        font-size: 1.5rem;
+    }
 </style>
 
 
@@ -116,7 +124,7 @@
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <a href="/editar-ticket/{{ $ticket->ticket_id }}">{{ $ticket->ticket_id }}</a></td>
+                                    <a class="edit-id" href="/editar-ticket/{{ $ticket->ticket_id }}">{{ $ticket->ticket_id }}</a></td>
                                 <td scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $ticket->ticket_nome }}</td>
