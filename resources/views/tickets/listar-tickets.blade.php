@@ -25,17 +25,15 @@
     .novo {
         text-align: center;
     }
-
     .div-paginacao {
         display: flex;
         justify-content: center;
-
+        
     }
-
-    body>div>main>div>div>div.div-paginacao>div>ul>nav>div.hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
-        flex-direction: column-reverse;
+    body > div > main > div > div > div.div-paginacao > div > ul > nav > div.hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+        flex-direction: column-reverse; 
     }
-
+    
     .edit-id {
         color: #42b0f5;
     }
@@ -56,13 +54,13 @@
 
     <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
-
-            @if (session('mensagem_sucesso'))
-                <div class="novo bg-green-400 text-white p-4">
-                    {!! session('mensagem_sucesso') !!}
-                </div>
-            @endif
-
+            
+                @if(session('mensagem_sucesso'))
+                    <div class="novo bg-green-400 text-white p-4">
+                        {!! session('mensagem_sucesso') !!}
+                    </div>
+                @endif
+            
             <div class="flex items-center justify-between pb-4">
                 <div>
                     <form>
@@ -126,9 +124,7 @@
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <a class="edit-id"
-                                        href="/editar-ticket/{{ $ticket->ticket_id }}">{{ $ticket->ticket_id }}</a>
-                                </td>
+                                    <a class="edit-id" href="/editar-ticket/{{ $ticket->ticket_id }}">{{ $ticket->ticket_id }}</a></td>
                                 <td scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $ticket->ticket_nome }}</td>
@@ -140,19 +136,16 @@
 
                                 @if (auth()->user()->role_id == 1)
                                     {{-- <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{ $ticket->status }}</td> --}}
-                                    <td scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <form action="/editar-ticket/atribuir/suport/{{ $ticket->ticket_id }}"
-                                            method="POST">
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <form action="/editar-ticket/atribuir/suport/{{$ticket->ticket_id}}" method="POST">
                                             @csrf
                                             <select id="status" name="status" onchange="form.submit()"
                                                 class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
-
+                                                
                                                 {{-- <option value="">{{$ticket->status}}</option> --}}
 
                                                 @foreach ($status as $value)
-                                                    <option
-                                                        value="{{ $value->id }} {{ $value->description != '' ? 'selected' : '' }} ">
+                                                    <option value="{{ $value->id }}" >
                                                         {{ $value->description }}
                                                     </option>
                                                 @endforeach
@@ -160,29 +153,27 @@
                                             </select>
                                         </form>
                                     </td>
+
                                 @else
-                                    <td scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <form action="/editar-ticket/atribuir/suport/{{ $ticket->ticket_id }}"
-                                            method="POST">
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                                        <form action="/editar-ticket/atribuir/suport/{{$ticket->ticket_id}}" method="POST">
                                             @csrf
                                             <select id="status" name="status" onchange="form.submit()"
                                                 class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
-
-                                                {{-- <option value="">{{$ticket->status}}</option> --}}
+                                                
+                                                <option value="">{{$ticket->status}}</option>
 
                                                 @foreach ($status as $value)
                                                     @if ($value->id == 4)
-                                                        <option
-                                                            value="{{ $value->id }} {{ $value->description != '' ? 'selected' : '' }} ">
+                                                        <option value="{{ $value->id }}" >
                                                             {{ $value->description }}
                                                         </option>
                                                     @endif
                                                 @endforeach
 
                                             </select>
-                                        </form>
-
+                                        </form>    
+                                    
                                     </td>
                                 @endif
 
@@ -195,19 +186,18 @@
 
 
                                 @if (auth()->user()->role_id == 1)
-                                    <td scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <form action="/editar-ticket/atribuir/suport/{{ $ticket->ticket_id }}"
-                                            method="POST">
+                                   
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> 
+                                        <form action="/editar-ticket/atribuir/suport/{{$ticket->ticket_id}}" method="POST">
                                             @csrf
 
                                             <select id="tecnico" name="tecnico" onchange="form.submit()"
                                                 class="block w-48 mt-4 px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-800 appearance-none hover:border-gray-400 focus:outline-none focus:ring focus:border-blue-300">
-
-                                                {{-- <option value="">{{ $ticket->tecnico_nome }}</option> --}}
+                                                
+                                                <option value="">{{$ticket->tecnico_nome}}</option>
 
                                                 @foreach ($tecnicos as $tecnico)
-                                                    <option value="{{ $tecnico->id}} {{$tecnico->id != '' ? 'selected' : ''}}">
+                                                    <option value="{{ $tecnico->id }}" >
                                                         {{ $tecnico->name }}
                                                     </option>
                                                 @endforeach
@@ -216,9 +206,7 @@
                                         </form>
                                     </td>
                                 @else
-                                    <td scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $ticket->tecnico_nome }}</td>
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> {{ $ticket->tecnico_nome }}</td>
                                 @endif
 
 
@@ -264,7 +252,9 @@
                     <ul class=" pagination pagination-sm justify-content-center">
                         {{ $tickets->links() }}
                     </ul>
-                </div>
+                </div> 
             </div>
         </div>
 </x-app-layout>
+
+
