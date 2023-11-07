@@ -29,7 +29,7 @@
         
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="div_botao_interacoes_chamado">
-                <a href="/ticket/feedback/{{$ticket_id}}" class="botao_interacoes_chamado bg-orange-500 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"> Interações do Chamado </a>
+                <a href="/ticket/feedback/{{$ticket_id}}" class="botao_interacoes_chamado bg-orange-500 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"> Chat </a>
             </div>
             <div class="fundo-laranja overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
