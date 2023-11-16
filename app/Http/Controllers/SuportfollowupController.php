@@ -45,14 +45,18 @@ class SuportfollowupController extends Controller
      */
     public function store(Request $request)
     {
-
+        date_default_timezone_set('UTC');
         $suportfollowup = new suportfollowup();
 
         $adicionar_suportfollowup = [
             'ticket_id' => $request->ticket_id,
             'user_id' => auth()->user()->id,
-            'description' => $request->descricao
+            'description' => $request->descricao,
+            'created_at' => date('Y-m-d H:i:s', strtotime('-3 hours')),
+            'updated_at' => date('Y-m-d H:i:s', strtotime('-3 hours')),
         ];
+      
+
         $suportfollowup = $suportfollowup::create($adicionar_suportfollowup);
         return redirect()->route('ticket.feedback.index', ['id' => $request->ticket_id ]);
         
