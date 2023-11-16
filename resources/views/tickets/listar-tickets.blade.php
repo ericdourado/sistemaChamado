@@ -1,3 +1,6 @@
+@php
+    date_default_timezone_set('UTC');
+@endphp
 <style>
     .truncate-description {
         max-width: 150px;
@@ -118,8 +121,12 @@
                 <tbody>
                     @if (!empty($tickets))
                         @foreach ($tickets as $ticket)
-                            @php $ticket->ticket_criado_em = date('d/m/Y', strtotime($ticket->ticket_criado_em)); @endphp
-                            @php $ticket->ticket_atualizado_em = date('d/m/Y', strtotime($ticket->ticket_atualizado_em)); @endphp
+                            @php $ticket->ticket_criado_em = date('d/m/Y H:m:s', strtotime($ticket->ticket_criado_em)); @endphp
+                            @php $ticket->ticket_atualizado_em = date('d/m/Y H:m:s', strtotime($ticket->ticket_atualizado_em)); @endphp
+
+                            @php $hora_criado_em = explode(' ',$ticket->ticket_criado_em);  @endphp
+                            @php $hora_atualizado_em = explode(' ',$ticket->ticket_atualizado_em); @endphp
+
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td scope="row"
@@ -215,11 +222,11 @@
 
 
                                 <td scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $ticket->ticket_criado_em }}</td>
+                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $hora_criado_em[0] }} <br> {{{$hora_criado_em[1]}}} </td>
                                 <td scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $ticket->ticket_atualizado_em }}</td>
+                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $hora_atualizado_em[0] }} <br> {{$hora_atualizado_em[1]}}</td>
 
                                 <td>
                                     <a href="/editar-ticket/{{ $ticket->ticket_id }}"

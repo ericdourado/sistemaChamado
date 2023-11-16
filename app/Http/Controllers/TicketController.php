@@ -104,6 +104,9 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+ 
+        date_default_timezone_set('UTC');
+
         
         $adicionar_ticket = [
             'user_id' => auth()->user()->id,
@@ -112,7 +115,9 @@ class TicketController extends Controller
             'ticket_name' => $request->titulo,
             'anydesk' => $request->anydesk,
             'description' => $request->descricao,
-            'suport_started' => null
+            'suport_started' => null,
+            'created_at' => date('Y-m-d H:i:s', strtotime('-3 hours')),
+            'updated_at' => date('Y-m-d H:i:s', strtotime('-3 hours')),
         ];
 
         $ticket = Ticket::create($adicionar_ticket);
@@ -169,13 +174,14 @@ class TicketController extends Controller
      */
     public function update(int $ticket_id, Request $request)
     {
-
+        date_default_timezone_set('UTC');
         $editar_ticket = [
             'suport_id' => $request->tecnico,
             'situation' => $request->status,
             'ticket_name' => $request->titulo,
             'anydesk' => $request->anydesk,
-            'description' => $request->descricao
+            'description' => $request->descricao,
+            'updated_at' => date('Y-m-d H:i:s', strtotime('-3 hours')),
         ];
 
         $ticket = Ticket::find($ticket_id);
