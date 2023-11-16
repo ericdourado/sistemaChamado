@@ -14,6 +14,7 @@ class user extends Controller
         $users = $users
                     ->leftjoin('roles', 'roles.id', '=', 'users.role_id')
                     ->select('users.id', 'users.name', 'roles.role', 'roles.id as role_id')
+                    ->where('users.id', '<>', auth()->user()->id)
                     ->get();
         $roles = new role();
         $roles = $roles->get();
