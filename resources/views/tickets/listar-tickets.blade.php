@@ -164,11 +164,11 @@
 
                                                 @foreach ($status as $value)
                                                 
-                                                    @if ($value->id == 4)
+                                                    {{-- @if ($value->id == 4) --}}
                                                         <option value="{{ $value->id }}" @if ($ticket->situacao_id == $value->id) selected @endif >
                                                             {{ $value->description }}
                                                         </option>
-                                                    @endif
+                                                    {{-- @endif --}}
                                                 @endforeach
 
                                             </select>
