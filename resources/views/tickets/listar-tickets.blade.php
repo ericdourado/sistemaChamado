@@ -121,11 +121,13 @@
                 <tbody>
                     @if (!empty($tickets))
                         @foreach ($tickets as $ticket)
-                            @php $ticket->ticket_criado_em = date('d/m/Y H:m:s', strtotime($ticket->ticket_criado_em)); @endphp
-                            @php $ticket->ticket_atualizado_em = date('d/m/Y H:m:s', strtotime($ticket->ticket_atualizado_em)); @endphp
+                           
+                            @php $data_criado_formatada = date('d/m/Y H:i:s', strtotime($ticket->ticket_criado_em)); @endphp
+                            @php $data_atualizado_formatada= date('d/m/Y H:i:s', strtotime($ticket->ticket_atualizado_em)); @endphp
 
-                            @php $hora_criado_em = explode(' ',$ticket->ticket_criado_em);  @endphp
-                            @php $hora_atualizado_em = explode(' ',$ticket->ticket_atualizado_em); @endphp
+                            @php $data_criado_formatada = explode(' ',$data_criado_formatada);  @endphp
+                            @php $data_atualizado_formatada = explode(' ', $data_atualizado_formatada); @endphp
+
 
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -223,10 +225,10 @@
 
                                 <td scope="row"
                                     class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $hora_criado_em[0] }} <br> {{{$hora_criado_em[1]}}} </td>
+                                    {{ $data_criado_formatada[0] }} <br>{{$data_criado_formatada[1]}}  </td>
                                 <td scope="row"
                                     class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $hora_atualizado_em[0] }} <br> {{$hora_atualizado_em[1]}}</td>
+                                    {{ $data_atualizado_formatada[0] }} <br> {{$data_atualizado_formatada[1]}}</td>
 
                                 <td>
                                     <a href="/editar-ticket/{{ $ticket->ticket_id }}"

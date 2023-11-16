@@ -175,6 +175,7 @@ class TicketController extends Controller
     public function update(int $ticket_id, Request $request)
     {
         date_default_timezone_set('UTC');
+        
         $editar_ticket = [
             'suport_id' => $request->tecnico,
             'situation' => $request->status,
